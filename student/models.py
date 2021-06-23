@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class student(models.Model):
@@ -31,4 +32,12 @@ class Mark(models.Model):
 class Grade(models.Model):
     grade = models.CharField(max_length=50,unique=True,primary_key=True)
     sm = models.ForeignKey(Mark,related_name='marks',on_delete=models.CASCADE,null=True,blank=True)
+
+class User(AbstractUser):
+    name = models.CharField(max_length=250)
+    email = models.EmailField(max_length=300,unique=True)
+    password = models.CharField(max_length=250)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS= []
     
